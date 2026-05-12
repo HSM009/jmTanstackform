@@ -1,0 +1,82 @@
+import {
+  HeadContent,
+  Link,
+  Scripts,
+  createRootRoute,
+} from '@tanstack/react-router'
+import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { TanStackDevtools } from '@tanstack/react-devtools'
+
+import appCss from '../styles.css?url'
+import { ThemeProvider } from '@/lib/theme-provider'
+import { Toaster } from '@/components/ui/sonner'
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+export const Route = createRootRoute({
+  head: () => ({
+    meta: [
+      {
+        charSet: 'utf-8',
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
+      },
+      {
+        title: 'HSM Tanstack App',
+      },
+    ],
+    links: [
+      {
+        rel: 'stylesheet',
+        href: appCss,
+      },
+    ],
+  }),
+
+  shellComponent: RootDocument,
+  notFoundComponent: () => {
+    return (
+      <div>
+        <p className=" p-4 text-amber-700 ">Page Not found :( </p>
+        <Link
+          className={cn(
+            ' block ml-4 mt-4 ',
+            buttonVariants({ variant: 'secondary' }),
+          )}
+          to="/"
+        >
+          Go home page
+        </Link>
+      </div>
+    )
+  },
+})
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        <ThemeProvider>
+          {children}
+          <Toaster closeButton position="top-center" />
+        </ThemeProvider>
+        <TanStackDevtools
+          config={{
+            position: 'bottom-right',
+          }}
+          plugins={[
+            {
+              name: 'Tanstack Router',
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
