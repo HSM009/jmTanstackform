@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "pnpm exec prisma generate --tp && vite build",
+    "build": "pnpm exec tsx node_modules/prisma/build/index.js generate && vite build",
     "preview": "vite preview --host",
     "start": "node .output/server/index.mjs",
     "test": "vitest run",
