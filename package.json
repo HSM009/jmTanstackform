@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
-    "build": "npx tsx node_modules/prisma/bin/index.js generate && vite build",
+    "dev": "vite dev --port 3000",
+    "build": "pnpm exec prisma generate --tp && vite build",
+    "preview": "vite preview --host",
     "start": "node .output/server/index.mjs",
     "test": "vitest run",
     "lint": "eslint",
