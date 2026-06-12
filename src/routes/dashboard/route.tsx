@@ -39,7 +39,7 @@ export const Route = createFileRoute('/dashboard')({
             ' block ml-4 mt-4 ',
             buttonVariants({ variant: 'secondary' }),
           )}
-          to="/dashboard"
+          to="/"
         >
           Go Dasboard Home Page
         </Link>
