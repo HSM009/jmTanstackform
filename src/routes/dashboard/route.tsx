@@ -18,7 +18,7 @@ export const Route = createFileRoute('/dashboard')({
     const session = await getSessionFn()
     if (!session || !session.user) {
       toast('Your session has expired. Please sign in again.')
-      throw redirect({ to: '/login' })
+      throw redirect({ to: '/' })
     }
     return { session }
   },
