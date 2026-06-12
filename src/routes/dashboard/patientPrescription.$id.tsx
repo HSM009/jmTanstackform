@@ -273,7 +273,7 @@ function RouteComponent() {
                     <SubmitPrescriptionDialog
                       prescriptionType={btn.type}
                       med_care_id={med_care_id!}
-                      doctorId={user?.id}
+                      doctorId={user?.id || ''}
                       note={doctorNote}
                       medicinesList={selectedMedicines}
                       prescriptionVal={btn.val}

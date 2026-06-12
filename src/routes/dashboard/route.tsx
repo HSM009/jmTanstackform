@@ -18,7 +18,7 @@ export const Route = createFileRoute('/dashboard')({
     const session = await getSessionFn()
     if (!session || !session.user) {
       toast('Your session has expired. Please sign in again.')
-      throw redirect({ to: '/' })
+      throw redirect({ to: '/login' })
     }
     return { session }
   },
@@ -39,7 +39,7 @@ export const Route = createFileRoute('/dashboard')({
             ' block ml-4 mt-4 ',
             buttonVariants({ variant: 'secondary' }),
           )}
-          to="/"
+          to="/dashboard"
         >
           Go Dasboard Home Page
         </Link>
