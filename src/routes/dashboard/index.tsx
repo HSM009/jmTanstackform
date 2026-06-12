@@ -1,10 +1,12 @@
 import { getSessionFn } from '@/data/session'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/dashboard/')({
   beforeLoad: async () => {
     const data = await getSessionFn()
-
+    if (!data || !data.user) {
+      throw redirect({ to: '/' })
+    }
     return { userName: data.user.name }
   },
   component: App,
