@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "vite dev",
     "build": "npx tsx node_modules/prisma/bin/index.js generate && vite build",
     "start": "node .output/server/index.mjs",
     "test": "vitest run",
