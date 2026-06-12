@@ -1,0 +1,15 @@
+"scripts": {
+"dev": "vite dev --port 3000",
+"build": "vite build",
+"preview": "vite preview --host",
+"test": "vitest run",
+"lint": "eslint",
+"format": "prettier",
+"check": "prettier --write . && eslint --fix",
+"post-cta-init": "npx create-db@latest --user-agent tanstack/tsrouter",
+"db:generate": "dotenv -e .env.local -- prisma generate",
+"db:push": "dotenv -e .env.local -- prisma db push",
+"db:migrate": "dotenv -e .env.local -- prisma migrate dev",
+"db:studio": "dotenv -e .env.local -- prisma studio",
+"db:seed": "dotenv -e .env.local -- prisma db seed"
+},

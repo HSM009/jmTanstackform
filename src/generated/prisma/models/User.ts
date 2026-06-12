@@ -20,15 +20,37 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
 
+export type UserAvgAggregateOutputType = {
+  failedAttempts: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  failedAttempts: number | null
+}
+
 export type UserMinAggregateOutputType = {
   id: string | null
+  title: string | null
   name: string | null
   email: string | null
+  qualification: string | null
+  cellNo: string | null
   emailVerified: boolean | null
+  role: string | null
+  banned: boolean | null
+  bannedReason: string | null
+  banReason: string | null
+  bannedUntil: Date | null
+  banExpires: Date | null
+  impersonatedBy: string | null
+  impersonatorId: string | null
+  failedAttempts: number | null
   image: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -36,9 +58,21 @@ export type UserMinAggregateOutputType = {
 
 export type UserMaxAggregateOutputType = {
   id: string | null
+  title: string | null
   name: string | null
   email: string | null
+  qualification: string | null
+  cellNo: string | null
   emailVerified: boolean | null
+  role: string | null
+  banned: boolean | null
+  bannedReason: string | null
+  banReason: string | null
+  bannedUntil: Date | null
+  banExpires: Date | null
+  impersonatedBy: string | null
+  impersonatorId: string | null
+  failedAttempts: number | null
   image: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -46,9 +80,21 @@ export type UserMaxAggregateOutputType = {
 
 export type UserCountAggregateOutputType = {
   id: number
+  title: number
   name: number
   email: number
+  qualification: number
+  cellNo: number
   emailVerified: number
+  role: number
+  banned: number
+  bannedReason: number
+  banReason: number
+  bannedUntil: number
+  banExpires: number
+  impersonatedBy: number
+  impersonatorId: number
+  failedAttempts: number
   image: number
   createdAt: number
   updatedAt: number
@@ -56,11 +102,31 @@ export type UserCountAggregateOutputType = {
 }
 
 
+export type UserAvgAggregateInputType = {
+  failedAttempts?: true
+}
+
+export type UserSumAggregateInputType = {
+  failedAttempts?: true
+}
+
 export type UserMinAggregateInputType = {
   id?: true
+  title?: true
   name?: true
   email?: true
+  qualification?: true
+  cellNo?: true
   emailVerified?: true
+  role?: true
+  banned?: true
+  bannedReason?: true
+  banReason?: true
+  bannedUntil?: true
+  banExpires?: true
+  impersonatedBy?: true
+  impersonatorId?: true
+  failedAttempts?: true
   image?: true
   createdAt?: true
   updatedAt?: true
@@ -68,9 +134,21 @@ export type UserMinAggregateInputType = {
 
 export type UserMaxAggregateInputType = {
   id?: true
+  title?: true
   name?: true
   email?: true
+  qualification?: true
+  cellNo?: true
   emailVerified?: true
+  role?: true
+  banned?: true
+  bannedReason?: true
+  banReason?: true
+  bannedUntil?: true
+  banExpires?: true
+  impersonatedBy?: true
+  impersonatorId?: true
+  failedAttempts?: true
   image?: true
   createdAt?: true
   updatedAt?: true
@@ -78,9 +156,21 @@ export type UserMaxAggregateInputType = {
 
 export type UserCountAggregateInputType = {
   id?: true
+  title?: true
   name?: true
   email?: true
+  qualification?: true
+  cellNo?: true
   emailVerified?: true
+  role?: true
+  banned?: true
+  bannedReason?: true
+  banReason?: true
+  bannedUntil?: true
+  banExpires?: true
+  impersonatedBy?: true
+  impersonatorId?: true
+  failedAttempts?: true
   image?: true
   createdAt?: true
   updatedAt?: true
@@ -125,6 +215,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -155,24 +257,40 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
 
 export type UserGroupByOutputType = {
   id: string
+  title: string | null
   name: string
   email: string
+  qualification: string | null
+  cellNo: string | null
   emailVerified: boolean
+  role: string | null
+  banned: boolean | null
+  bannedReason: string | null
+  banReason: string | null
+  bannedUntil: Date | null
+  banExpires: Date | null
+  impersonatedBy: string | null
+  impersonatorId: string | null
+  failedAttempts: number
   image: string | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
 
-type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+export type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<UserGroupByOutputType, T['by']> &
       {
@@ -192,26 +310,52 @@ export type UserWhereInput = {
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
+  title?: Prisma.StringNullableFilter<"User"> | string | null
   name?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
+  qualification?: Prisma.StringNullableFilter<"User"> | string | null
+  cellNo?: Prisma.StringNullableFilter<"User"> | string | null
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
+  role?: Prisma.StringNullableFilter<"User"> | string | null
+  banned?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  bannedReason?: Prisma.StringNullableFilter<"User"> | string | null
+  banReason?: Prisma.StringNullableFilter<"User"> | string | null
+  bannedUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  banExpires?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  impersonatedBy?: Prisma.StringNullableFilter<"User"> | string | null
+  impersonatorId?: Prisma.StringNullableFilter<"User"> | string | null
+  failedAttempts?: Prisma.IntFilter<"User"> | number
   image?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
+  doctorDetails?: Prisma.PatientPrescriptionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  title?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  qualification?: Prisma.SortOrderInput | Prisma.SortOrder
+  cellNo?: Prisma.SortOrderInput | Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  banned?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannedReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  banReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannedUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  banExpires?: Prisma.SortOrderInput | Prisma.SortOrder
+  impersonatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  impersonatorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  failedAttempts?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
+  doctorDetails?: Prisma.PatientPrescriptionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -220,26 +364,53 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
+  title?: Prisma.StringNullableFilter<"User"> | string | null
   name?: Prisma.StringFilter<"User"> | string
+  qualification?: Prisma.StringNullableFilter<"User"> | string | null
+  cellNo?: Prisma.StringNullableFilter<"User"> | string | null
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
+  role?: Prisma.StringNullableFilter<"User"> | string | null
+  banned?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  bannedReason?: Prisma.StringNullableFilter<"User"> | string | null
+  banReason?: Prisma.StringNullableFilter<"User"> | string | null
+  bannedUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  banExpires?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  impersonatedBy?: Prisma.StringNullableFilter<"User"> | string | null
+  impersonatorId?: Prisma.StringNullableFilter<"User"> | string | null
+  failedAttempts?: Prisma.IntFilter<"User"> | number
   image?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
+  doctorDetails?: Prisma.PatientPrescriptionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  title?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  qualification?: Prisma.SortOrderInput | Prisma.SortOrder
+  cellNo?: Prisma.SortOrderInput | Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  banned?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannedReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  banReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannedUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  banExpires?: Prisma.SortOrderInput | Prisma.SortOrder
+  impersonatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  impersonatorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  failedAttempts?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -247,9 +418,21 @@ export type UserScalarWhereWithAggregatesInput = {
   OR?: Prisma.UserScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
+  title?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  qualification?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  cellNo?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  role?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  banned?: Prisma.BoolNullableWithAggregatesFilter<"User"> | boolean | null
+  bannedReason?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  banReason?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  bannedUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  banExpires?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  impersonatedBy?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  impersonatorId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  failedAttempts?: Prisma.IntWithAggregatesFilter<"User"> | number
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -257,57 +440,121 @@ export type UserScalarWhereWithAggregatesInput = {
 
 export type UserCreateInput = {
   id: string
+  title?: string | null
   name: string
   email: string
+  qualification?: string | null
+  cellNo?: string | null
   emailVerified?: boolean
+  role?: string | null
+  banned?: boolean | null
+  bannedReason?: string | null
+  banReason?: string | null
+  bannedUntil?: Date | string | null
+  banExpires?: Date | string | null
+  impersonatedBy?: string | null
+  impersonatorId?: string | null
+  failedAttempts?: number
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  doctorDetails?: Prisma.PatientPrescriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
   id: string
+  title?: string | null
   name: string
   email: string
+  qualification?: string | null
+  cellNo?: string | null
   emailVerified?: boolean
+  role?: string | null
+  banned?: boolean | null
+  bannedReason?: string | null
+  banReason?: string | null
+  bannedUntil?: Date | string | null
+  banExpires?: Date | string | null
+  impersonatedBy?: string | null
+  impersonatorId?: string | null
+  failedAttempts?: number
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  doctorDetails?: Prisma.PatientPrescriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  qualification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cellNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  bannedReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  impersonatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  impersonatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failedAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  doctorDetails?: Prisma.PatientPrescriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  qualification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cellNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  bannedReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  impersonatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  impersonatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failedAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  doctorDetails?: Prisma.PatientPrescriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
   id: string
+  title?: string | null
   name: string
   email: string
+  qualification?: string | null
+  cellNo?: string | null
   emailVerified?: boolean
+  role?: string | null
+  banned?: boolean | null
+  bannedReason?: string | null
+  banReason?: string | null
+  bannedUntil?: Date | string | null
+  banExpires?: Date | string | null
+  impersonatedBy?: string | null
+  impersonatorId?: string | null
+  failedAttempts?: number
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -315,9 +562,21 @@ export type UserCreateManyInput = {
 
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  qualification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cellNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  bannedReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  impersonatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  impersonatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failedAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -325,9 +584,21 @@ export type UserUpdateManyMutationInput = {
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  qualification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cellNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  bannedReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  impersonatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  impersonatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failedAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -335,19 +606,47 @@ export type UserUncheckedUpdateManyInput = {
 
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  qualification?: Prisma.SortOrder
+  cellNo?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  banned?: Prisma.SortOrder
+  bannedReason?: Prisma.SortOrder
+  banReason?: Prisma.SortOrder
+  bannedUntil?: Prisma.SortOrder
+  banExpires?: Prisma.SortOrder
+  impersonatedBy?: Prisma.SortOrder
+  impersonatorId?: Prisma.SortOrder
+  failedAttempts?: Prisma.SortOrder
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
+export type UserAvgOrderByAggregateInput = {
+  failedAttempts?: Prisma.SortOrder
+}
+
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  qualification?: Prisma.SortOrder
+  cellNo?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  banned?: Prisma.SortOrder
+  bannedReason?: Prisma.SortOrder
+  banReason?: Prisma.SortOrder
+  bannedUntil?: Prisma.SortOrder
+  banExpires?: Prisma.SortOrder
+  impersonatedBy?: Prisma.SortOrder
+  impersonatorId?: Prisma.SortOrder
+  failedAttempts?: Prisma.SortOrder
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -355,12 +654,28 @@ export type UserMaxOrderByAggregateInput = {
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  qualification?: Prisma.SortOrder
+  cellNo?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  banned?: Prisma.SortOrder
+  bannedReason?: Prisma.SortOrder
+  banReason?: Prisma.SortOrder
+  bannedUntil?: Prisma.SortOrder
+  banExpires?: Prisma.SortOrder
+  impersonatedBy?: Prisma.SortOrder
+  impersonatorId?: Prisma.SortOrder
+  failedAttempts?: Prisma.SortOrder
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  failedAttempts?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -368,12 +683,41 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
+export type StringFieldUpdateOperationsInput = {
+  set?: string
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type UserCreateNestedOneWithoutSessionsInput = {
@@ -404,26 +748,68 @@ export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
 }
 
+export type UserCreateNestedOneWithoutDoctorDetailsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDoctorDetailsInput, Prisma.UserUncheckedCreateWithoutDoctorDetailsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDoctorDetailsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutDoctorDetailsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDoctorDetailsInput, Prisma.UserUncheckedCreateWithoutDoctorDetailsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDoctorDetailsInput
+  upsert?: Prisma.UserUpsertWithoutDoctorDetailsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDoctorDetailsInput, Prisma.UserUpdateWithoutDoctorDetailsInput>, Prisma.UserUncheckedUpdateWithoutDoctorDetailsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id: string
+  title?: string | null
   name: string
   email: string
+  qualification?: string | null
+  cellNo?: string | null
   emailVerified?: boolean
+  role?: string | null
+  banned?: boolean | null
+  bannedReason?: string | null
+  banReason?: string | null
+  bannedUntil?: Date | string | null
+  banExpires?: Date | string | null
+  impersonatedBy?: string | null
+  impersonatorId?: string | null
+  failedAttempts?: number
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  doctorDetails?: Prisma.PatientPrescriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
   id: string
+  title?: string | null
   name: string
   email: string
+  qualification?: string | null
+  cellNo?: string | null
   emailVerified?: boolean
+  role?: string | null
+  banned?: boolean | null
+  bannedReason?: string | null
+  banReason?: string | null
+  bannedUntil?: Date | string | null
+  banExpires?: Date | string | null
+  impersonatedBy?: string | null
+  impersonatorId?: string | null
+  failedAttempts?: number
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  doctorDetails?: Prisma.PatientPrescriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -444,46 +830,98 @@ export type UserUpdateToOneWithWhereWithoutSessionsInput = {
 
 export type UserUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  qualification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cellNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  bannedReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  impersonatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  impersonatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failedAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  doctorDetails?: Prisma.PatientPrescriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  qualification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cellNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  bannedReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  impersonatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  impersonatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failedAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  doctorDetails?: Prisma.PatientPrescriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
   id: string
+  title?: string | null
   name: string
   email: string
+  qualification?: string | null
+  cellNo?: string | null
   emailVerified?: boolean
+  role?: string | null
+  banned?: boolean | null
+  bannedReason?: string | null
+  banReason?: string | null
+  bannedUntil?: Date | string | null
+  banExpires?: Date | string | null
+  impersonatedBy?: string | null
+  impersonatorId?: string | null
+  failedAttempts?: number
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  doctorDetails?: Prisma.PatientPrescriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
   id: string
+  title?: string | null
   name: string
   email: string
+  qualification?: string | null
+  cellNo?: string | null
   emailVerified?: boolean
+  role?: string | null
+  banned?: boolean | null
+  bannedReason?: string | null
+  banReason?: string | null
+  bannedUntil?: Date | string | null
+  banExpires?: Date | string | null
+  impersonatedBy?: string | null
+  impersonatorId?: string | null
+  failedAttempts?: number
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  doctorDetails?: Prisma.PatientPrescriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -504,24 +942,162 @@ export type UserUpdateToOneWithWhereWithoutAccountsInput = {
 
 export type UserUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  qualification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cellNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  bannedReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  impersonatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  impersonatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failedAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  doctorDetails?: Prisma.PatientPrescriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  qualification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cellNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  bannedReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  impersonatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  impersonatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failedAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  doctorDetails?: Prisma.PatientPrescriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDoctorDetailsInput = {
+  id: string
+  title?: string | null
+  name: string
+  email: string
+  qualification?: string | null
+  cellNo?: string | null
+  emailVerified?: boolean
+  role?: string | null
+  banned?: boolean | null
+  bannedReason?: string | null
+  banReason?: string | null
+  bannedUntil?: Date | string | null
+  banExpires?: Date | string | null
+  impersonatedBy?: string | null
+  impersonatorId?: string | null
+  failedAttempts?: number
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDoctorDetailsInput = {
+  id: string
+  title?: string | null
+  name: string
+  email: string
+  qualification?: string | null
+  cellNo?: string | null
+  emailVerified?: boolean
+  role?: string | null
+  banned?: boolean | null
+  bannedReason?: string | null
+  banReason?: string | null
+  bannedUntil?: Date | string | null
+  banExpires?: Date | string | null
+  impersonatedBy?: string | null
+  impersonatorId?: string | null
+  failedAttempts?: number
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDoctorDetailsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDoctorDetailsInput, Prisma.UserUncheckedCreateWithoutDoctorDetailsInput>
+}
+
+export type UserUpsertWithoutDoctorDetailsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDoctorDetailsInput, Prisma.UserUncheckedUpdateWithoutDoctorDetailsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDoctorDetailsInput, Prisma.UserUncheckedCreateWithoutDoctorDetailsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDoctorDetailsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDoctorDetailsInput, Prisma.UserUncheckedUpdateWithoutDoctorDetailsInput>
+}
+
+export type UserUpdateWithoutDoctorDetailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  qualification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cellNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  bannedReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  impersonatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  impersonatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failedAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDoctorDetailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  qualification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cellNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  bannedReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  impersonatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  impersonatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failedAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -532,11 +1108,13 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
 export type UserCountOutputType = {
   sessions: number
   accounts: number
+  doctorDetails: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+  doctorDetails?: boolean | UserCountOutputTypeCountDoctorDetailsArgs
 }
 
 /**
@@ -563,25 +1141,57 @@ export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.AccountWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDoctorDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PatientPrescriptionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  title?: boolean
   name?: boolean
   email?: boolean
+  qualification?: boolean
+  cellNo?: boolean
   emailVerified?: boolean
+  role?: boolean
+  banned?: boolean
+  bannedReason?: boolean
+  banReason?: boolean
+  bannedUntil?: boolean
+  banExpires?: boolean
+  impersonatedBy?: boolean
+  impersonatorId?: boolean
+  failedAttempts?: boolean
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  doctorDetails?: boolean | Prisma.User$doctorDetailsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  title?: boolean
   name?: boolean
   email?: boolean
+  qualification?: boolean
+  cellNo?: boolean
   emailVerified?: boolean
+  role?: boolean
+  banned?: boolean
+  bannedReason?: boolean
+  banReason?: boolean
+  bannedUntil?: boolean
+  banExpires?: boolean
+  impersonatedBy?: boolean
+  impersonatorId?: boolean
+  failedAttempts?: boolean
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -589,9 +1199,21 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  title?: boolean
   name?: boolean
   email?: boolean
+  qualification?: boolean
+  cellNo?: boolean
   emailVerified?: boolean
+  role?: boolean
+  banned?: boolean
+  bannedReason?: boolean
+  banReason?: boolean
+  bannedUntil?: boolean
+  banExpires?: boolean
+  impersonatedBy?: boolean
+  impersonatorId?: boolean
+  failedAttempts?: boolean
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -599,18 +1221,31 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 
 export type UserSelectScalar = {
   id?: boolean
+  title?: boolean
   name?: boolean
   email?: boolean
+  qualification?: boolean
+  cellNo?: boolean
   emailVerified?: boolean
+  role?: boolean
+  banned?: boolean
+  bannedReason?: boolean
+  banReason?: boolean
+  bannedUntil?: boolean
+  banExpires?: boolean
+  impersonatedBy?: boolean
+  impersonatorId?: boolean
+  failedAttempts?: boolean
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "name" | "email" | "qualification" | "cellNo" | "emailVerified" | "role" | "banned" | "bannedReason" | "banReason" | "bannedUntil" | "banExpires" | "impersonatedBy" | "impersonatorId" | "failedAttempts" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  doctorDetails?: boolean | Prisma.User$doctorDetailsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -621,12 +1256,25 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
+    doctorDetails: Prisma.$PatientPrescriptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    title: string | null
     name: string
     email: string
+    qualification: string | null
+    cellNo: string | null
     emailVerified: boolean
+    role: string | null
+    banned: boolean | null
+    bannedReason: string | null
+    banReason: string | null
+    bannedUntil: Date | null
+    banExpires: Date | null
+    impersonatedBy: string | null
+    impersonatorId: string | null
+    failedAttempts: number
     image: string | null
     createdAt: Date
     updatedAt: Date
@@ -1026,6 +1674,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  doctorDetails<T extends Prisma.User$doctorDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$doctorDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PatientPrescriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1056,9 +1705,21 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
+  readonly title: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly qualification: Prisma.FieldRef<"User", 'String'>
+  readonly cellNo: Prisma.FieldRef<"User", 'String'>
   readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
+  readonly role: Prisma.FieldRef<"User", 'String'>
+  readonly banned: Prisma.FieldRef<"User", 'Boolean'>
+  readonly bannedReason: Prisma.FieldRef<"User", 'String'>
+  readonly banReason: Prisma.FieldRef<"User", 'String'>
+  readonly bannedUntil: Prisma.FieldRef<"User", 'DateTime'>
+  readonly banExpires: Prisma.FieldRef<"User", 'DateTime'>
+  readonly impersonatedBy: Prisma.FieldRef<"User", 'String'>
+  readonly impersonatorId: Prisma.FieldRef<"User", 'String'>
+  readonly failedAttempts: Prisma.FieldRef<"User", 'Int'>
   readonly image: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -1258,6 +1919,11 @@ export type UserFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Skip the first `n` Users.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Users.
+   */
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
@@ -1495,6 +2161,30 @@ export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
+}
+
+/**
+ * User.doctorDetails
+ */
+export type User$doctorDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PatientPrescription
+   */
+  select?: Prisma.PatientPrescriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PatientPrescription
+   */
+  omit?: Prisma.PatientPrescriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PatientPrescriptionInclude<ExtArgs> | null
+  where?: Prisma.PatientPrescriptionWhereInput
+  orderBy?: Prisma.PatientPrescriptionOrderByWithRelationInput | Prisma.PatientPrescriptionOrderByWithRelationInput[]
+  cursor?: Prisma.PatientPrescriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PatientPrescriptionScalarFieldEnum | Prisma.PatientPrescriptionScalarFieldEnum[]
 }
 
 /**

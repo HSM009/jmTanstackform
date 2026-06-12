@@ -51,11 +51,13 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Todo: 'Todo',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  PatientRecord: 'PatientRecord',
+  PatientPrescription: 'PatientPrescription',
+  MedicineList: 'MedicineList'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -74,20 +76,23 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const TodoScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  createdAt: 'createdAt'
-} as const
-
-export type TodoScalarFieldEnum = (typeof TodoScalarFieldEnum)[keyof typeof TodoScalarFieldEnum]
-
-
 export const UserScalarFieldEnum = {
   id: 'id',
+  title: 'title',
   name: 'name',
   email: 'email',
+  qualification: 'qualification',
+  cellNo: 'cellNo',
   emailVerified: 'emailVerified',
+  role: 'role',
+  banned: 'banned',
+  bannedReason: 'bannedReason',
+  banReason: 'banReason',
+  bannedUntil: 'bannedUntil',
+  banExpires: 'banExpires',
+  impersonatedBy: 'impersonatedBy',
+  impersonatorId: 'impersonatorId',
+  failedAttempts: 'failedAttempts',
   image: 'image',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -104,7 +109,9 @@ export const SessionScalarFieldEnum = {
   updatedAt: 'updatedAt',
   ipAddress: 'ipAddress',
   userAgent: 'userAgent',
-  userId: 'userId'
+  userId: 'userId',
+  impersonatorId: 'impersonatorId',
+  impersonatedBy: 'impersonatedBy'
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -139,6 +146,49 @@ export const VerificationScalarFieldEnum = {
 } as const
 
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const PatientRecordScalarFieldEnum = {
+  id: 'id',
+  med_care_id: 'med_care_id',
+  name: 'name',
+  age: 'age',
+  gender: 'gender',
+  email: 'email',
+  phone: 'phone',
+  createdProfile: 'createdProfile',
+  activeStatus: 'activeStatus'
+} as const
+
+export type PatientRecordScalarFieldEnum = (typeof PatientRecordScalarFieldEnum)[keyof typeof PatientRecordScalarFieldEnum]
+
+
+export const PatientPrescriptionScalarFieldEnum = {
+  id: 'id',
+  med_care_id: 'med_care_id',
+  note: 'note',
+  prescriptionsContent: 'prescriptionsContent',
+  createdPrescription: 'createdPrescription',
+  relatedImages: 'relatedImages',
+  prescriptionImage: 'prescriptionImage',
+  activeStatus: 'activeStatus',
+  prescriptionSubmitted: 'prescriptionSubmitted',
+  doctorId: 'doctorId'
+} as const
+
+export type PatientPrescriptionScalarFieldEnum = (typeof PatientPrescriptionScalarFieldEnum)[keyof typeof PatientPrescriptionScalarFieldEnum]
+
+
+export const MedicineListScalarFieldEnum = {
+  id: 'id',
+  medicineContentEnglish: 'medicineContentEnglish',
+  medicineContentUrdu: 'medicineContentUrdu',
+  Dosage: 'Dosage',
+  createdPrescription: 'createdPrescription',
+  activeStatus: 'activeStatus'
+} as const
+
+export type MedicineListScalarFieldEnum = (typeof MedicineListScalarFieldEnum)[keyof typeof MedicineListScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -16,11 +16,16 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
+import { Link } from '@tanstack/react-router'
 
 export function NavUser({ user }: navUserProps) {
-  const { isMobile } = useSidebar()
+  const { isMobile, setOpenMobile } = useSidebar()
   const handleSignOut = useHandleSignOut()
-
+  const handleNavigation = () => {
+    if (isMobile) {
+      setOpenMobile(false)
+    }
+  }
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -36,13 +41,13 @@ export function NavUser({ user }: navUserProps) {
                     user.image ??
                     'https://api.dicebear.com/9.x/big-smile/svg?mouth=kawaii,braces,gapSmile'
                   }
-                  alt={user.name}
+                  alt={user?.name}
                 />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate font-medium">{user?.name}</span>
+                <span className="truncate text-xs">{user?.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -61,17 +66,20 @@ export function NavUser({ user }: navUserProps) {
                       user.image ??
                       'https://api.dicebear.com/9.x/big-smile/svg?mouth=kawaii,braces,gapSmile'
                     }
-                    alt={user.name}
+                    alt={user?.name}
                   />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate font-medium">{user?.name}</span>
+                  <span className="truncate text-xs">{user?.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
+            <DropdownMenuItem asChild onClick={handleNavigation}>
+              <Link to="/dashboard/accountSetting">Account Settings</Link>
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={handleSignOut}>
               <LogOut />
               Log out

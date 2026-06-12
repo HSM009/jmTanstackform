@@ -45,17 +45,37 @@ export function SignupForm({}: React.ComponentProps<typeof Card>) {
             onSuccess: () => {
               toast.success('Account Creates Successfully.')
               navigate({
-                to: '/dashboard',
+                to: '/login',
               })
             },
             onError: ({ error }) => {
-              toast.error(error.message)
+              if (error && error.message === 'USER_ALREADY_EXISTS') {
+                toast.error('Registration failed. Email already exists.')
+                form.setFieldMeta('email', (prev) => ({
+                  ...prev,
+                  isTouched: true,
+                  errorMap: {
+                    onSubmit: 'This email address is already in use.',
+                  },
+                }))
+              } else {
+                toast.error(error.message || 'An unexpected error occurred.')
+              }
             },
           },
         })
       })
     },
   })
+
+  const formatFieldErrors = (errors: any[]) => {
+    return errors.map((err) => {
+      if (err && typeof err === 'object' && 'message' in err) {
+        return { message: String(err.message) }
+      }
+      return { message: String(err) }
+    })
+  }
   return (
     <Card>
       <CardHeader>
@@ -66,8 +86,10 @@ export function SignupForm({}: React.ComponentProps<typeof Card>) {
       </CardHeader>
       <CardContent>
         <form
+          noValidate
           onSubmit={(e) => {
             e.preventDefault()
+            e.stopPropagation()
             form.handleSubmit()
           }}
         >
@@ -89,6 +111,7 @@ export function SignupForm({}: React.ComponentProps<typeof Card>) {
                       aria-invalid={isInvalid}
                       placeholder="HSM"
                       autoComplete="off"
+                      disabled={isPending}
                     />
                     {isInvalid && (
                       <FieldError errors={field.state.meta.errors} />
@@ -100,8 +123,13 @@ export function SignupForm({}: React.ComponentProps<typeof Card>) {
             <form.Field
               name="email"
               children={(field) => {
+                const manualError = field.state.meta.errorMap.onSubmit
                 const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
+                  field.state.meta.isTouched &&
+                  (!field.state.meta.isValid || !!manualError)
+                const formattedErrors = formatFieldErrors(
+                  field.state.meta.errors,
+                )
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -115,9 +143,10 @@ export function SignupForm({}: React.ComponentProps<typeof Card>) {
                       placeholder="hsm@gmail.com"
                       autoComplete="off"
                       type="email"
+                      disabled={isPending}
                     />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
+                    {isInvalid && formattedErrors.length > 0 && (
+                      <FieldError errors={formattedErrors} />
                     )}
                   </Field>
                 )
@@ -141,6 +170,7 @@ export function SignupForm({}: React.ComponentProps<typeof Card>) {
                       placeholder="********"
                       autoComplete="off"
                       type="password"
+                      disabled={isPending}
                     />
                     {isInvalid && (
                       <FieldError errors={field.state.meta.errors} />
@@ -172,3 +202,5 @@ export function SignupForm({}: React.ComponentProps<typeof Card>) {
     </Card>
   )
 }
+
+// hoseinsirat@gmail.com

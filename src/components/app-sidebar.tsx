@@ -1,4 +1,4 @@
-import { BookmarkIcon, Compass, Import } from 'lucide-react'
+import { BookmarkIcon, FilePlus, PlusIcon, ViewIcon } from 'lucide-react'
 import { NavPrimary } from '@/components/nav-primary'
 import { NavUser } from '@/components/nav-user'
 import {
@@ -12,33 +12,39 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar'
 import { Link, linkOptions } from '@tanstack/react-router'
-import { NavPrimaryProps, navUserProps } from '@/lib/types'
+import { extendedUser, NavPrimaryProps } from '@/lib/types'
 
 // This is sample data.
 const navItems: NavPrimaryProps['items'] = linkOptions([
   {
-    title: 'Items',
-    icon: BookmarkIcon,
-    to: '/dashboard/items',
+    title: 'View Patients',
+    icon: ViewIcon,
+    to: '/dashboard/viewPatients',
     activeOptions: { exact: false },
   },
   {
-    title: 'Import',
-    icon: Import,
-    to: '/dashboard/import',
+    title: 'Add Patients',
+    icon: PlusIcon,
+    to: '/dashboard/addPatient',
     activeOptions: { exact: false },
   },
   {
-    title: 'Discover',
-    icon: Compass,
-    to: '/dashboard/discover',
+    title: 'Add & View Medicine List',
+    icon: FilePlus,
+    to: '/dashboard/viewMedicineList',
+    activeOptions: { exact: false },
+  },
+  {
+    title: 'Administer User',
+    icon: FilePlus,
+    to: '/dashboard/administerUser',
     activeOptions: { exact: false },
   },
 ])
 
-export function AppSidebar({ user }: navUserProps) {
+export function AppSidebar({ user, role }: extendedUser) {
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" className=" ">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -48,8 +54,10 @@ export function AppSidebar({ user }: navUserProps) {
                   <BookmarkIcon className=" size-4" />
                 </div>
                 <div className=" grid flex-1 text-left text-sm leading-tight">
-                  <span className=" font-medium">Recall</span>
-                  <span className=" text-xs">Your AI knowledge base</span>
+                  <span className=" font-medium">MED CARE</span>
+                  <span className=" text-xs">
+                    Your Best Healthcare Companion
+                  </span>
                 </div>
               </Link>
             </SidebarMenuButton>
@@ -58,7 +66,14 @@ export function AppSidebar({ user }: navUserProps) {
       </SidebarHeader>
       <SidebarContent>
         {/* <NavMain items={data.navMain} /> */}
-        <NavPrimary items={navItems} />
+        <NavPrimary
+          items={(() => {
+            if (role.toUpperCase() !== 'ADMIN') {
+              return navItems.filter((item) => item.title !== 'Administer User')
+            }
+            return navItems
+          })()}
+        />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={user} />

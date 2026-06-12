@@ -39,13 +39,42 @@ export function LoginForm() {
           password: value.password,
           fetchOptions: {
             onSuccess: () => {
-              navigate({
-                to: '/dashboard',
-              })
+              navigate({ to: '/dashboard' })
               toast.success('Logged in successfully')
             },
             onError: ({ error }) => {
-              toast.error(error.message)
+              if (error.message?.startsWith('ADMIN_BANNED:')) {
+                toast.error('Your account has been banned by an administrator.')
+                return
+              }
+              if (error.message?.startsWith('ADMIN_REJECT_REGISTRATION:')) {
+                toast.error(
+                  'Your account approval has been rejected by an administrator.',
+                )
+                return
+              }
+              if (error.message?.startsWith('LOCKOUT_EXPIRY:')) {
+                const parts = error.message.split(':')
+                const expiryTimestamp = parseInt(parts[1], 10)
+                const remainingMs = expiryTimestamp - Date.now()
+                const remainingMinutes = Math.ceil(remainingMs / (60 * 1000))
+                toast.error(
+                  `Too many failed attempts. Your account is locked for another ${remainingMinutes} minute(s).`,
+                )
+                return
+              }
+              if (
+                error &&
+                (error.status === 401 ||
+                  error.code === 'INVALID_EMAIL_OR_PASSWORD')
+              ) {
+                toast.error(
+                  'This email is not registered, or the password you entered is incorrect.',
+                )
+                return
+              }
+
+              toast.error(error.message || 'An unexpected error occurred.')
             },
           },
         })
@@ -83,9 +112,10 @@ export function LoginForm() {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
-                      placeholder="john@john.com"
+                      placeholder="hsm@hsm.com"
                       type="email"
                       autoComplete="off"
+                      disabled={isPending}
                     />
                     {isInvalid && (
                       <FieldError errors={field.state.meta.errors} />
@@ -110,9 +140,10 @@ export function LoginForm() {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
-                      placeholder="******"
+                      placeholder="********"
                       type="password"
                       autoComplete="off"
+                      disabled={isPending}
                     />
                     {isInvalid && (
                       <FieldError errors={field.state.meta.errors} />
