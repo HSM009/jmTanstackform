@@ -10,14 +10,12 @@ import { getSessionFn } from '@/data/session'
 import { cn } from '@/lib/utils'
 import { createFileRoute, Link, Outlet, redirect } from '@tanstack/react-router'
 import { Loader2 } from 'lucide-react'
-import { toast } from 'sonner'
 
 export const Route = createFileRoute('/dashboard')({
   component: RouteComponent,
   beforeLoad: async () => {
     const session = await getSessionFn()
     if (!session || !session.user) {
-      toast('Your session has expired. Please sign in again.')
       throw redirect({ to: '/login' })
     }
     return { session }
